@@ -24,4 +24,4 @@ class ProgressiveEffects {
 // console.log(ProgressiveEffects.exponentialGrowth(100, 0.1, 10)); 
 // console.log(ProgressiveEffects.logarithmicGrowth(100, 10, 10)); 
 
-module.exports = ProgressiveEffects;
+export default ProgressiveEffects;

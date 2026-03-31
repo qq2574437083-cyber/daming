@@ -1,10 +1,10 @@
 // index.js
 
 // Importing core modules
-import EventQueue from './core/moduleA';
-import EventDispatcher from './core/moduleB';
-import EventHandler from './core/moduleC';
-import ProgressiveEffects from './core/ProgressiveEffects';
+import EventQueue from './core/moduleA.js';
+import EventDispatcher from './core/moduleB.js';
+import EventHandler from './core/moduleC.js';
+import ProgressiveEffects from './core/ProgressiveEffects.js';
 
 // Main EventPoolSystem interface
 class EventPoolSystem {
