@@ -13,12 +13,12 @@ const Navigation = () => {
   };
 
   const navItems = [
-    { path: '/', icon: Home, label: 'Dashboard' },
-    { path: '/tasks', icon: CheckSquare, label: 'Tasks' },
-    { path: '/projects', icon: Folder, label: 'Projects' },
-    { path: '/team', icon: Users, label: 'Team' },
-    { path: '/calendar', icon: Calendar, label: 'Calendar' },
-    { path: '/settings', icon: Settings, label: 'Settings' },
+    { path: '/', icon: Home, label: '仪表盘' },
+    { path: '/tasks', icon: CheckSquare, label: '任务' },
+    { path: '/projects', icon: Folder, label: '项目' },
+    { path: '/team', icon: Users, label: '团队' },
+    { path: '/calendar', icon: Calendar, label: '日历' },
+    { path: '/settings', icon: Settings, label: '设置' },
   ];
 
   return (
@@ -28,11 +28,11 @@ const Navigation = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <CheckSquare className="h-8 w-8 text-blue-600" />
-              <span className="text-xl font-bold text-gray-800">TaskMaster</span>
+              <span className="text-xl font-bold text-gray-800">任务大师</span>
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
+          {/* 桌面端导航 */}
           <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -69,7 +69,7 @@ const Navigation = () => {
                     className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                   >
                     <LogOut className="h-5 w-5" />
-                    <span>Sign Out</span>
+                    <span>退出登录</span>
                   </button>
                 </div>
               ) : (
@@ -78,20 +78,20 @@ const Navigation = () => {
                     to="/login"
                     className="px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                   >
-                    Sign In
+                    登录
                   </Link>
                   <Link
                     to="/register"
                     className="px-3 py-2 rounded-md text-sm font-medium bg-blue-600 text-white hover:bg-blue-700"
                   >
-                    Sign Up
+                    注册
                   </Link>
                 </div>
               )}
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* 移动端菜单按钮 */}
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -106,7 +106,7 @@ const Navigation = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* 移动端导航 */}
         {isMenuOpen && (
           <div className="md:hidden py-4 space-y-2">
             {navItems.map((item) => {
@@ -151,7 +151,7 @@ const Navigation = () => {
                     className="flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                   >
                     <LogOut className="h-5 w-5" />
-                    <span>Sign Out</span>
+                    <span>退出登录</span>
                   </button>
                 </div>
               ) : (
@@ -161,14 +161,14 @@ const Navigation = () => {
                     className="px-3 py-2 rounded-md text-sm font-medium text-center text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Sign In
+                    登录
                   </Link>
                   <Link
                     to="/register"
                     className="px-3 py-2 rounded-md text-sm font-medium text-center bg-blue-600 text-white hover:bg-blue-700"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Sign Up
+                    注册
                   </Link>
                 </div>
               )}

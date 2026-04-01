@@ -14,7 +14,6 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await signIn(formData.email, formData.password);
-    // After successful login, navigate to dashboard
     navigate('/');
   };
 
@@ -23,14 +22,14 @@ const Login = () => {
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <CheckSquare className="h-12 w-12 text-blue-600 mx-auto" />
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
+          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">登录您的账户</h2>
           <p className="mt-2 text-sm text-gray-600">
-            Or{' '}
+            还没有账户？{' '}
             <Link
               to="/register"
               className="font-medium text-blue-600 hover:text-blue-500"
             >
-              create a new account
+              立即注册
             </Link>
           </p>
         </div>
@@ -54,7 +53,7 @@ const Login = () => {
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email address
+                邮箱地址
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -68,14 +67,14 @@ const Login = () => {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
-                  placeholder="Enter your email"
+                  placeholder="请输入邮箱"
                 />
               </div>
             </div>
 
             <div className="mt-4">
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
+                密码
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -89,7 +88,7 @@ const Login = () => {
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                   className="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
-                  placeholder="Enter your password"
+                  placeholder="请输入密码"
                 />
               </div>
             </div>
@@ -104,7 +103,7 @@ const Login = () => {
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
               <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                Remember me
+                记住我
               </label>
             </div>
 
@@ -113,7 +112,7 @@ const Login = () => {
                 href="#"
                 className="font-medium text-blue-600 hover:text-blue-500"
               >
-                Forgot your password?
+                忘记密码？
               </a>
             </div>
           </div>
@@ -127,7 +126,7 @@ const Login = () => {
               {isLoading ? (
                 <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></div>
               ) : (
-                'Sign in'
+                '登录'
               )}
             </button>
           </div>

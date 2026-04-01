@@ -61,20 +61,20 @@ const Tasks = () => {
       <div className="container mx-auto px-4 py-16 text-center">
         <div className="max-w-md mx-auto">
           <CheckSquare className="h-16 w-16 text-blue-600 mx-auto mb-6" />
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Welcome to TaskMaster</h1>
-          <p className="text-gray-600 mb-8">Sign in to manage your tasks</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">欢迎使用任务大师</h1>
+          <p className="text-gray-600 mb-8">登录后即可管理您的任务</p>
           <div className="flex flex-col space-y-3">
             <a
               href="/login"
               className="px-6 py-3 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-colors"
             >
-              Sign In
+              登录
             </a>
             <a
               href="/register"
               className="px-6 py-3 bg-white border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition-colors"
             >
-              Create Account
+              创建账户
             </a>
           </div>
         </div>
@@ -82,7 +82,7 @@ const Tasks = () => {
     );
   }
 
-  // Filter tasks
+  // 筛选任务
   const filteredTasks = tasks.filter((task) => {
     if (filters.status !== 'all' && task.status !== filters.status) return false;
     if (filters.priority !== 'all' && task.priority !== filters.priority) return false;
@@ -90,7 +90,7 @@ const Tasks = () => {
     return true;
   });
 
-  // Handle add task
+  // 添加任务
   const handleAddTask = async () => {
     if (!newTask.title) return;
     
@@ -110,7 +110,7 @@ const Tasks = () => {
     setShowAddModal(false);
   };
 
-  // Handle edit task
+  // 编辑任务
   const handleEditTask = async () => {
     if (!editingTask) return;
     
@@ -119,32 +119,46 @@ const Tasks = () => {
     setShowEditModal(false);
   };
 
-  // Handle delete task
+  // 删除任务
   const handleDeleteTask = async (id: string) => {
-    if (window.confirm('Are you sure you want to delete this task?')) {
+    if (window.confirm('确定要删除这个任务吗？')) {
       await deleteTask(id);
     }
+  };
+
+  // 优先级文本
+  const priorityText = {
+    low: '低',
+    medium: '中',
+    high: '高'
+  };
+
+  // 状态文本
+  const statusText = {
+    pending: '待处理',
+    in_progress: '进行中',
+    completed: '已完成'
   };
 
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Tasks</h1>
+        <h1 className="text-2xl font-bold text-gray-900">任务管理</h1>
         <button
           onClick={() => setShowAddModal(true)}
           className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
         >
           <Plus className="h-5 w-5" />
-          <span>Add Task</span>
+          <span>添加任务</span>
         </button>
       </div>
 
-      {/* Filters */}
+      {/* 筛选器 */}
       <div className="bg-white rounded-lg shadow p-4 mb-6">
         <div className="flex flex-wrap items-center gap-4">
           <div className="flex items-center space-x-2">
             <Filter className="h-5 w-5 text-gray-500" />
-            <span className="text-sm font-medium text-gray-700">Filters:</span>
+            <span className="text-sm font-medium text-gray-700">筛选：</span>
           </div>
           
           <select
@@ -152,10 +166,10 @@ const Tasks = () => {
             onChange={(e) => setFilters({ ...filters, status: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="all">All Statuses</option>
-            <option value="pending">Pending</option>
-            <option value="in_progress">In Progress</option>
-            <option value="completed">Completed</option>
+            <option value="all">全部状态</option>
+            <option value="pending">待处理</option>
+            <option value="in_progress">进行中</option>
+            <option value="completed">已完成</option>
           </select>
           
           <select
@@ -163,10 +177,10 @@ const Tasks = () => {
             onChange={(e) => setFilters({ ...filters, priority: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="all">All Priorities</option>
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
+            <option value="all">全部优先级</option>
+            <option value="low">低</option>
+            <option value="medium">中</option>
+            <option value="high">高</option>
           </select>
           
           <select
@@ -174,7 +188,7 @@ const Tasks = () => {
             onChange={(e) => setFilters({ ...filters, project: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="all">All Projects</option>
+            <option value="all">全部项目</option>
             {projects.map((project) => (
               <option key={project.id} value={project.id}>{project.name}</option>
             ))}
@@ -182,7 +196,7 @@ const Tasks = () => {
         </div>
       </div>
 
-      {/* Tasks List */}
+      {/* 任务列表 */}
       <div className="space-y-4">
         {filteredTasks.length > 0 ? (
           filteredTasks.map((task) => (
@@ -216,7 +230,7 @@ const Tasks = () => {
               <div className="flex flex-wrap items-center gap-4 text-sm">
                 <div className="flex items-center space-x-1 text-gray-600">
                   <Calendar className="h-4 w-4" />
-                  <span>{task.due_date ? format(new Date(task.due_date), 'MMM d, yyyy') : 'No due date'}</span>
+                  <span>{task.due_date ? format(new Date(task.due_date), 'yyyy年MM月dd日') : '无截止日期'}</span>
                 </div>
                 
                 <div className="flex items-center space-x-1">
@@ -228,7 +242,7 @@ const Tasks = () => {
                       ? 'text-yellow-600'
                       : 'text-green-600'
                   }`}>
-                    {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
+                    {priorityText[task.priority]}
                   </span>
                 </div>
                 
@@ -239,7 +253,7 @@ const Tasks = () => {
                     ? 'bg-blue-100 text-blue-800'
                     : 'bg-gray-100 text-gray-800'
                 }`}>
-                  {task.status.charAt(0).toUpperCase() + task.status.slice(1).replace('_', ' ')}
+                  {statusText[task.status]}
                 </div>
                 
                 {task.project_id && (
@@ -254,25 +268,25 @@ const Tasks = () => {
         ) : (
           <div className="bg-white rounded-lg shadow p-8 text-center">
             <CheckSquare className="h-12 w-12 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No tasks found</h3>
-            <p className="text-gray-600 mb-4">Add your first task to get started</p>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">暂无任务</h3>
+            <p className="text-gray-600 mb-4">创建您的第一个任务开始使用</p>
             <button
               onClick={() => setShowAddModal(true)}
               className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors mx-auto"
             >
               <Plus className="h-5 w-5" />
-              <span>Add Task</span>
+              <span>添加任务</span>
             </button>
           </div>
         )}
       </div>
 
-      {/* Add Task Modal */}
+      {/* 添加任务弹窗 */}
       {showAddModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold text-gray-900">Add New Task</h2>
+              <h2 className="text-lg font-semibold text-gray-900">添加新任务</h2>
               <button
                 onClick={() => setShowAddModal(false)}
                 className="p-2 rounded-md text-gray-500 hover:bg-gray-100"
@@ -285,29 +299,29 @@ const Tasks = () => {
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">任务标题</label>
                 <input
                   type="text"
                   value={newTask.title}
                   onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Task title"
+                  placeholder="输入任务标题"
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">任务描述</label>
                 <textarea
                   value={newTask.description}
                   onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Task description"
+                  placeholder="输入任务描述"
                   rows={3}
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Due Date</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">截止日期</label>
                 <input
                   type="date"
                   value={newTask.due_date}
@@ -317,26 +331,26 @@ const Tasks = () => {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">优先级</label>
                 <select
                   value={newTask.priority}
                   onChange={(e) => setNewTask({ ...newTask, priority: e.target.value as 'low' | 'medium' | 'high' })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  <option value="low">Low</option>
-                  <option value="medium">Medium</option>
-                  <option value="high">High</option>
+                  <option value="low">低</option>
+                  <option value="medium">中</option>
+                  <option value="high">高</option>
                 </select>
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Project</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">所属项目</label>
                 <select
                   value={newTask.project_id || ''}
                   onChange={(e) => setNewTask({ ...newTask, project_id: e.target.value || null })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  <option value="">No Project</option>
+                  <option value="">无项目</option>
                   {projects.map((project) => (
                     <option key={project.id} value={project.id}>{project.name}</option>
                   ))}
@@ -348,13 +362,13 @@ const Tasks = () => {
                   onClick={() => setShowAddModal(false)}
                   className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
                 >
-                  Cancel
+                  取消
                 </button>
                 <button
                   onClick={handleAddTask}
                   className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
                 >
-                  Add Task
+                  添加
                 </button>
               </div>
             </div>
@@ -362,12 +376,12 @@ const Tasks = () => {
         </div>
       )}
 
-      {/* Edit Task Modal */}
+      {/* 编辑任务弹窗 */}
       {showEditModal && editingTask && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold text-gray-900">Edit Task</h2>
+              <h2 className="text-lg font-semibold text-gray-900">编辑任务</h2>
               <button
                 onClick={() => setShowEditModal(false)}
                 className="p-2 rounded-md text-gray-500 hover:bg-gray-100"
@@ -380,29 +394,29 @@ const Tasks = () => {
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">任务标题</label>
                 <input
                   type="text"
                   value={editingTask.title}
                   onChange={(e) => setEditingTask({ ...editingTask, title: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Task title"
+                  placeholder="输入任务标题"
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">任务描述</label>
                 <textarea
                   value={editingTask.description}
                   onChange={(e) => setEditingTask({ ...editingTask, description: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Task description"
+                  placeholder="输入任务描述"
                   rows={3}
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Due Date</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">截止日期</label>
                 <input
                   type="date"
                   value={editingTask.due_date ? editingTask.due_date.split('T')[0] : ''}
@@ -412,39 +426,39 @@ const Tasks = () => {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">优先级</label>
                 <select
                   value={editingTask.priority}
                   onChange={(e) => setEditingTask({ ...editingTask, priority: e.target.value as 'low' | 'medium' | 'high' })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  <option value="low">Low</option>
-                  <option value="medium">Medium</option>
-                  <option value="high">High</option>
+                  <option value="low">低</option>
+                  <option value="medium">中</option>
+                  <option value="high">高</option>
                 </select>
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">状态</label>
                 <select
                   value={editingTask.status}
                   onChange={(e) => setEditingTask({ ...editingTask, status: e.target.value as 'pending' | 'in_progress' | 'completed' })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  <option value="pending">Pending</option>
-                  <option value="in_progress">In Progress</option>
-                  <option value="completed">Completed</option>
+                  <option value="pending">待处理</option>
+                  <option value="in_progress">进行中</option>
+                  <option value="completed">已完成</option>
                 </select>
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Project</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">所属项目</label>
                 <select
                   value={editingTask.project_id || ''}
                   onChange={(e) => setEditingTask({ ...editingTask, project_id: e.target.value || null })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  <option value="">No Project</option>
+                  <option value="">无项目</option>
                   {projects.map((project) => (
                     <option key={project.id} value={project.id}>{project.name}</option>
                   ))}
@@ -456,13 +470,13 @@ const Tasks = () => {
                   onClick={() => setShowEditModal(false)}
                   className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
                 >
-                  Cancel
+                  取消
                 </button>
                 <button
                   onClick={handleEditTask}
                   className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
                 >
-                  Save Changes
+                  保存
                 </button>
               </div>
             </div>

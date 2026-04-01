@@ -49,20 +49,20 @@ const Projects = () => {
       <div className="container mx-auto px-4 py-16 text-center">
         <div className="max-w-md mx-auto">
           <Folder className="h-16 w-16 text-blue-600 mx-auto mb-6" />
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Welcome to TaskMaster</h1>
-          <p className="text-gray-600 mb-8">Sign in to manage your projects</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">欢迎使用任务大师</h1>
+          <p className="text-gray-600 mb-8">登录后即可管理您的项目</p>
           <div className="flex flex-col space-y-3">
             <a
               href="/login"
               className="px-6 py-3 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-colors"
             >
-              Sign In
+              登录
             </a>
             <a
               href="/register"
               className="px-6 py-3 bg-white border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition-colors"
             >
-              Create Account
+              创建账户
             </a>
           </div>
         </div>
@@ -70,7 +70,7 @@ const Projects = () => {
     );
   }
 
-  // Handle add project
+  // 添加项目
   const handleAddProject = async () => {
     if (!newProject.name) return;
     
@@ -86,7 +86,7 @@ const Projects = () => {
     setShowAddModal(false);
   };
 
-  // Handle edit project
+  // 编辑项目
   const handleEditProject = async () => {
     if (!editingProject) return;
     
@@ -95,19 +95,19 @@ const Projects = () => {
     setShowEditModal(false);
   };
 
-  // Handle delete project
+  // 删除项目
   const handleDeleteProject = async (id: string) => {
-    if (window.confirm('Are you sure you want to delete this project? This will also delete all associated tasks.')) {
+    if (window.confirm('确定要删除这个项目吗？这将同时删除所有相关任务。')) {
       await deleteProject(id);
     }
   };
 
-  // Get task count for each project
+  // 获取项目任务数量
   const getTaskCount = (projectId: string) => {
     return tasks.filter((task) => task.project_id === projectId).length;
   };
 
-  // Get completed task count for each project
+  // 获取项目已完成任务数量
   const getCompletedTaskCount = (projectId: string) => {
     return tasks.filter((task) => task.project_id === projectId && task.status === 'completed').length;
   };
@@ -115,17 +115,17 @@ const Projects = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Projects</h1>
+        <h1 className="text-2xl font-bold text-gray-900">项目管理</h1>
         <button
           onClick={() => setShowAddModal(true)}
           className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
         >
           <Plus className="h-5 w-5" />
-          <span>Add Project</span>
+          <span>添加项目</span>
         </button>
       </div>
 
-      {/* Projects Grid */}
+      {/* 项目网格 */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.length > 0 ? (
           projects.map((project) => {
@@ -165,7 +165,7 @@ const Projects = () => {
                 
                 <div className="mb-4">
                   <div className="flex justify-between text-sm mb-1">
-                    <span className="text-gray-600">Progress</span>
+                    <span className="text-gray-600">进度</span>
                     <span className="font-medium text-gray-900">{completionRate}%</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
@@ -179,11 +179,11 @@ const Projects = () => {
                 <div className="flex justify-between items-center text-sm">
                   <div className="flex items-center space-x-1 text-gray-600">
                     <CheckSquare className="h-4 w-4" />
-                    <span>{completedTasks}/{totalTasks} tasks</span>
+                    <span>{completedTasks}/{totalTasks} 任务</span>
                   </div>
                   <div className="flex items-center space-x-1 text-gray-600">
                     <Users className="h-4 w-4" />
-                    <span>Team: 1</span>
+                    <span>团队：1人</span>
                   </div>
                 </div>
               </div>
@@ -192,25 +192,25 @@ const Projects = () => {
         ) : (
           <div className="col-span-full bg-white rounded-lg shadow p-8 text-center">
             <Folder className="h-12 w-12 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No projects found</h3>
-            <p className="text-gray-600 mb-4">Create your first project to get started</p>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">暂无项目</h3>
+            <p className="text-gray-600 mb-4">创建您的第一个项目开始使用</p>
             <button
               onClick={() => setShowAddModal(true)}
               className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors mx-auto"
             >
               <Plus className="h-5 w-5" />
-              <span>Add Project</span>
+              <span>添加项目</span>
             </button>
           </div>
         )}
       </div>
 
-      {/* Add Project Modal */}
+      {/* 添加项目弹窗 */}
       {showAddModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold text-gray-900">Add New Project</h2>
+              <h2 className="text-lg font-semibold text-gray-900">添加新项目</h2>
               <button
                 onClick={() => setShowAddModal(false)}
                 className="p-2 rounded-md text-gray-500 hover:bg-gray-100"
@@ -223,23 +223,23 @@ const Projects = () => {
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Project Name</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">项目名称</label>
                 <input
                   type="text"
                   value={newProject.name}
                   onChange={(e) => setNewProject({ ...newProject, name: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Project name"
+                  placeholder="输入项目名称"
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">项目描述</label>
                 <textarea
                   value={newProject.description}
                   onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Project description"
+                  placeholder="输入项目描述"
                   rows={3}
                 />
               </div>
@@ -249,13 +249,13 @@ const Projects = () => {
                   onClick={() => setShowAddModal(false)}
                   className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
                 >
-                  Cancel
+                  取消
                 </button>
                 <button
                   onClick={handleAddProject}
                   className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
                 >
-                  Add Project
+                  添加
                 </button>
               </div>
             </div>
@@ -263,12 +263,12 @@ const Projects = () => {
         </div>
       )}
 
-      {/* Edit Project Modal */}
+      {/* 编辑项目弹窗 */}
       {showEditModal && editingProject && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold text-gray-900">Edit Project</h2>
+              <h2 className="text-lg font-semibold text-gray-900">编辑项目</h2>
               <button
                 onClick={() => setShowEditModal(false)}
                 className="p-2 rounded-md text-gray-500 hover:bg-gray-100"
@@ -281,23 +281,23 @@ const Projects = () => {
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Project Name</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">项目名称</label>
                 <input
                   type="text"
                   value={editingProject.name}
                   onChange={(e) => setEditingProject({ ...editingProject, name: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Project name"
+                  placeholder="输入项目名称"
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">项目描述</label>
                 <textarea
                   value={editingProject.description}
                   onChange={(e) => setEditingProject({ ...editingProject, description: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Project description"
+                  placeholder="输入项目描述"
                   rows={3}
                 />
               </div>
@@ -307,13 +307,13 @@ const Projects = () => {
                   onClick={() => setShowEditModal(false)}
                   className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
                 >
-                  Cancel
+                  取消
                 </button>
                 <button
                   onClick={handleEditProject}
                   className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
                 >
-                  Save Changes
+                  保存
                 </button>
               </div>
             </div>
