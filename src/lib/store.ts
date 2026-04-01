@@ -72,7 +72,7 @@ export const useStore = create<TaskStore>((set, get) => ({
       if (error) throw error;
       set({ tasks: data || [], isLoading: false });
     } catch (error) {
-      set({ error: 'Failed to fetch tasks', isLoading: false });
+      set({ error: '获取任务失败', isLoading: false });
       console.error('Error fetching tasks:', error);
     }
   },
@@ -92,7 +92,7 @@ export const useStore = create<TaskStore>((set, get) => ({
         isLoading: false
       }));
     } catch (error) {
-      set({ error: 'Failed to add task', isLoading: false });
+      set({ error: '添加任务失败', isLoading: false });
       console.error('Error adding task:', error);
     }
   },
@@ -115,7 +115,7 @@ export const useStore = create<TaskStore>((set, get) => ({
         isLoading: false
       }));
     } catch (error) {
-      set({ error: 'Failed to update task', isLoading: false });
+      set({ error: '更新任务失败', isLoading: false });
       console.error('Error updating task:', error);
     }
   },
@@ -134,7 +134,7 @@ export const useStore = create<TaskStore>((set, get) => ({
         isLoading: false
       }));
     } catch (error) {
-      set({ error: 'Failed to delete task', isLoading: false });
+      set({ error: '删除任务失败', isLoading: false });
       console.error('Error deleting task:', error);
     }
   },
@@ -150,7 +150,7 @@ export const useStore = create<TaskStore>((set, get) => ({
       if (error) throw error;
       set({ projects: data || [], isLoading: false });
     } catch (error) {
-      set({ error: 'Failed to fetch projects', isLoading: false });
+      set({ error: '获取项目失败', isLoading: false });
       console.error('Error fetching projects:', error);
     }
   },
@@ -170,7 +170,7 @@ export const useStore = create<TaskStore>((set, get) => ({
         isLoading: false
       }));
     } catch (error) {
-      set({ error: 'Failed to add project', isLoading: false });
+      set({ error: '添加项目失败', isLoading: false });
       console.error('Error adding project:', error);
     }
   },
@@ -193,7 +193,7 @@ export const useStore = create<TaskStore>((set, get) => ({
         isLoading: false
       }));
     } catch (error) {
-      set({ error: 'Failed to update project', isLoading: false });
+      set({ error: '更新项目失败', isLoading: false });
       console.error('Error updating project:', error);
     }
   },
@@ -213,7 +213,7 @@ export const useStore = create<TaskStore>((set, get) => ({
         isLoading: false
       }));
     } catch (error) {
-      set({ error: 'Failed to delete project', isLoading: false });
+      set({ error: '删除项目失败', isLoading: false });
       console.error('Error deleting project:', error);
     }
   },
@@ -240,7 +240,7 @@ export const useStore = create<TaskStore>((set, get) => ({
         }, isLoading: false });
       }
     } catch (error) {
-      set({ error: 'Failed to sign up', isLoading: false });
+      set({ error: '注册失败', isLoading: false });
       console.error('Error signing up:', error);
     }
   },
@@ -263,7 +263,7 @@ export const useStore = create<TaskStore>((set, get) => ({
         }, isLoading: false });
       }
     } catch (error) {
-      set({ error: 'Failed to sign in', isLoading: false });
+      set({ error: '登录失败', isLoading: false });
       console.error('Error signing in:', error);
     }
   },
@@ -275,7 +275,7 @@ export const useStore = create<TaskStore>((set, get) => ({
       if (error) throw error;
       set({ user: null, tasks: [], projects: [], isLoading: false });
     } catch (error) {
-      set({ error: 'Failed to sign out', isLoading: false });
+      set({ error: '退出失败', isLoading: false });
       console.error('Error signing out:', error);
     }
   },
@@ -298,7 +298,7 @@ export const useStore = create<TaskStore>((set, get) => ({
         set({ user: null, isLoading: false });
       }
     } catch (error) {
-      set({ error: 'Failed to check auth', isLoading: false });
+      set({ error: '检查认证状态失败', isLoading: false });
       console.error('Error checking auth:', error);
     }
   }
