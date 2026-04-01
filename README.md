@@ -1,50 +1,57 @@
-# Event Pool System Documentation
+# React + TypeScript + Vite
 
-## Overview
-The Event Pool System allows for efficient management and processing of events in applications. This documentation covers the structure, usage, and best practices for working with the system.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## How to Use the Event Pool System
+Currently, two official plugins are available:
 
-### Initialization
-To initialize the event pool, you would typically call the following function:
-```python
-EventPool.initialize()
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+
+```js
+export default tseslint.config({
+  extends: [
+    // Remove ...tseslint.configs.recommended and replace with this
+    ...tseslint.configs.recommendedTypeChecked,
+    // Alternatively, use this for stricter rules
+    ...tseslint.configs.strictTypeChecked,
+    // Optionally, add this for stylistic rules
+    ...tseslint.configs.stylisticTypeChecked,
+  ],
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
 ```
 
-### Adding Events
-You can add events to the pool using:
-```python
-event_pool.add(event)
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default tseslint.config({
+  extends: [
+    // other configs...
+    // Enable lint rules for React
+    reactX.configs['recommended-typescript'],
+    // Enable lint rules for React DOM
+    reactDom.configs.recommended,
+  ],
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
 ```
-
-### Processing Events
-To process events, use:
-```python
-event_pool.process_all()
-```
-
-### Example Usage
-Here’s a basic example of how to use the event pool:
-```python
-from event_pool import EventPool
-
-event_pool = EventPool.initialize()
-event_pool.add(Event("event_name"))
-event_pool.process_all()
-```
-
-## Project Structure
-
-```
-project_root/
-|-- event_pool/
-|   |-- __init__.py
-|   |-- event.py  # defines the Event class
-|   |-- pool.py   # manages the Event Pool
-|-- tests/
-|   |-- test_event_pool.py  # unit tests for the event pool
-|-- README.md
-```  
-
-## Conclusion
-This documentation provides a brief overview of the Event Pool System. For more in-depth information, refer to the code comments and further documentation as required.
